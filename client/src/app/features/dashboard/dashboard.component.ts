@@ -16,7 +16,7 @@ import { WorkoutStats, FitnessProfile, Workout } from '../../shared/models';
       <!-- Greeting -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-white">
-          Good {{ greeting }}, <span class="text-emerald-400">{{ auth.user()?.name?.split(' ')[0] }}!</span> 👋
+          Good {{ greeting }}, <span class="text-emerald-400">{{ auth.user()?.name!.split(' ')[0] }}!</span> 👋
         </h1>
         <p class="text-gray-400 mt-1">Here's your fitness overview</p>
       </div>
@@ -140,7 +140,7 @@ import { WorkoutStats, FitnessProfile, Workout } from '../../shared/models';
               <div class="mt-6 pt-4 border-t border-gray-800 space-y-2">
                 <div class="flex justify-between text-sm">
                   <span class="text-gray-400">Avg. Duration</span>
-                  <span class="text-white font-medium">{{ stats?.averageDuration ?? 0 }} min</span>
+                  <span class="text-white font-medium">{{ stats!.averageDuration ?? 0 }} min</span>
                 </div>
               </div>
             }
@@ -214,3 +214,4 @@ export class DashboardComponent implements OnInit {
     return colors[type] ?? 'bg-gray-700';
   }
 }
+

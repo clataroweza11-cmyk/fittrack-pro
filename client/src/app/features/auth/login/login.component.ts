@@ -88,7 +88,7 @@ import { AuthService } from '../../../core/services/auth.service';
         <!-- Demo credentials hint -->
         <div class="mt-6 p-4 bg-gray-900 rounded-xl border border-gray-800 text-xs text-gray-500">
           <p class="font-medium text-gray-400 mb-1">Demo credentials:</p>
-          <p>Admin: admin@fittrackpro.com / Admin@123</p>
+          <p>Admin: admin&#64;fittrackpro.com / Admin&#64;123</p>
         </div>
       </div>
     </div>

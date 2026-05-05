@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormsModule } from '@angular/forms';
 import { ProfileService, ProgressService } from '../../core/services/fitness.service';
 import { AuthService } from '../../core/services/auth.service';
 import { FitnessProfile, Progress } from '../../shared/models';
@@ -8,7 +8,7 @@ import { FitnessProfile, Progress } from '../../shared/models';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   template: `
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 class="text-3xl font-bold text-white mb-8">My Profile</h1>
