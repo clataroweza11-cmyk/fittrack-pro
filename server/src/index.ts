@@ -4,10 +4,10 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
-import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 
 import { swaggerSpec } from './config/swagger';
+import { loadEnv } from './config/env';
 import { errorHandler } from './middleware/errorHandler';
 import { notFound } from './middleware/notFound';
 
@@ -19,7 +19,7 @@ import workoutRoutes from './routes/workout.routes';
 import progressRoutes from './routes/progress.routes';
 
 // Load environment variables
-dotenv.config();
+loadEnv();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
