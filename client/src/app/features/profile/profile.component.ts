@@ -275,17 +275,51 @@ export class ProfileComponent implements OnInit {
     this.successMsg = '';
     this.errorMsg = '';
 
-    this.profileService.upsertProfile(this.profileForm.value as FitnessProfile).subscribe({
+    const payload = this.buildProfilePayload();
+
+    this.profileService.upsertProfile(payload).subscribe({
       next: () => {
         this.successMsg = 'Profile saved successfully!';
         this.savingProfile = false;
         setTimeout(() => (this.successMsg = ''), 3000);
       },
       error: (err) => {
-        this.errorMsg = err.error?.error || 'Failed to save profile.';
+        const messages = err?.error?.messages;
+        if (Array.isArray(messages) && messages.length) {
+          this.errorMsg = messages.join(' ');
+        } else {
+          this.errorMsg = err.error?.error || 'Failed to save profile.';
+        }
         this.savingProfile = false;
       },
     });
+  }
+
+  private buildProfilePayload(): Partial<FitnessProfile> {
+    const form = this.profileForm.value;
+    const payload: Partial<FitnessProfile> = {
+      weight: form.weight ?? undefined,
+      height: this.normalizeHeight(form.height ?? null),
+      age: form.age ?? undefined,
+      gender: form.gender || undefined,
+      goal: form.goal?.trim() || undefined,
+      activity_level: form.activity_level || undefined,
+      target_weight: form.target_weight ?? undefined,
+      daily_calorie_goal: form.daily_calorie_goal ?? undefined,
+    };
+
+    return payload;
+  }
+
+  private normalizeHeight(height: number | null): number | undefined {
+    if (height == null) return undefined;
+    if (height <= 0) return undefined;
+
+    // Support height entered in meters (e.g. 1.75) or feet (e.g. 5.8 / 6.0).
+    if (height > 0 && height < 3.5) return Number((height * 100).toFixed(2));
+    if (height >= 3.5 && height < 50) return Number((height * 30.48).toFixed(2));
+
+    return height;
   }
 
   onImageSelect(event: Event): void {
