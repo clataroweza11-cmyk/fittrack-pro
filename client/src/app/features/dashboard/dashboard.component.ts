@@ -140,7 +140,7 @@ import { WorkoutStats, FitnessProfile, Workout } from '../../shared/models';
               <div class="mt-6 pt-4 border-t border-gray-800 space-y-2">
                 <div class="flex justify-between text-sm">
                   <span class="text-gray-400">Avg. Duration</span>
-                  <span class="text-white font-medium">{{ stats!.averageDuration ?? 0 }} min</span>
+                  <span class="text-white font-medium">{{ stats!.averageDuration }} min</span>
                 </div>
               </div>
             }
