@@ -155,7 +155,9 @@ export class RegisterComponent {
     this.auth.register(name!, email!, password!).subscribe({
       next: () => {},
       error: (err) => {
-        this.errorMsg = err.error?.error || 'Registration failed. Please try again.';
+        this.errorMsg = err.status === 0
+          ? 'Cannot reach the server. Check backend URL/CORS settings and try again.'
+          : (err.error?.error || 'Registration failed. Please try again.');
         this.loading = false;
       },
       complete: () => { this.loading = false; },
