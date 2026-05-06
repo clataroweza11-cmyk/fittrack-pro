@@ -15,7 +15,7 @@ const options: swaggerJsdoc.Options = {
     servers: [
       {
         url: process.env.NODE_ENV === 'production'
-          ? 'https://fittrack-pro-api.onrender.com'
+          ? 'https://fittrack-pro-1-8zno.onrender.com'
           : 'http://localhost:3000',
         description: process.env.NODE_ENV === 'production' ? 'Production' : 'Development',
       },
