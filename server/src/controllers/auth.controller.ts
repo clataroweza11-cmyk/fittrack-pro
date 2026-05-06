@@ -1,16 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import type { SignOptions } from 'jsonwebtoken';
 import { supabase } from '../config/supabase';
 import { AppError } from '../middleware/errorHandler';
 import { RegisterRequest, LoginRequest, UserPublic } from '../types';
 
 // Helper: Sign JWT
 const signToken = (userId: string, email: string, role: string): string => {
+  const expiresIn = (process.env.JWT_EXPIRES_IN || '7d') as SignOptions['expiresIn'];
+
   return jwt.sign(
     { userId, email, role },
     process.env.JWT_SECRET!,
-    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    { expiresIn }
   );
 };
 
